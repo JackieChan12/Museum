@@ -1,0 +1,19 @@
+{
+    "name": "MiraboSync.Gameplay",
+    "rootNamespace": "MiraboSync.View",
+    "references": [
+        "GUID:0931fd7b502a85741a630d5c43bc8067",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:7d8788162c0190c4c8b801543ada1607"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
