@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: a1da353243062479a9b31c85074a796b
-timeCreated: 1511248512
-licenseType: Store
+guid: f59614c0487861349a197df7e55dc4c8
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - WaterMaterial: {fileID: 2100000, guid: a5f2339f242f6cc41a982ec55ea3c201, type: 2}
-  - DirectionalLight: {instanceID: 0}
-  - Underwater: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

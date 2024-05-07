@@ -1,393 +1,162 @@
 using UnityEngine;
-using System.Collections.Generic;
-
-public enum WaterQuality { High = 2, Medium = 1, Low = 0, }
 [ExecuteInEditMode]
 public class JPWater : MonoBehaviour
 {
-  public Camera cam;
-	public Material WaterMaterial;
-	[SerializeField] WaterQuality WaterQuality = WaterQuality.High;
-	[SerializeField] bool EdgeBlend = true;
-	[SerializeField] bool GerstnerDisplace = true;
-	[SerializeField] bool DisablePixelLights = true;
-	[SerializeField] int ReflectionSize = 256;
-	[SerializeField] float ClipPlaneOffset = 0.07f;
-	[SerializeField] LayerMask ReflectLayers = -1;
-	public Light DirectionalLight;
+	[Header("REFLECTION RENDERTEXTURE")]
+  public Camera reflectionCamera=null;
+	[Range(8, 1024)] public int resolution=128;
+	public Material waterMat=null;
+  private RenderTexture reflectionRt=null;
+	private static bool onRend=false;
+	[Header("UNDERWATER FX")]
+	[SerializeField] bool useUnderwaterFx=true;
+	public Light directionalLight;
+	public FlareLayer sunflare;
+	public AudioSource underwaterSnd;
+	public Texture[] lightCookie;
+	[SerializeField]  private float underwaterDensity=0.0f;
+	private float startFogDensity=0.001f;
+	private Vector3 startLightDir=Vector3.zero;
+	private Color startFogColor=new Color (0.7f,0.9f,1.0f,1.0f);
+	private float screenWaterY=1;
 
-	Dictionary<Camera, Camera> m_ReflectionCameras = new Dictionary<Camera, Camera>(); // Camera -> Camera table
-	RenderTexture m_ReflectionTexture;
-	int m_OldReflectionTextureSize;
-	static bool s_InsideWater;
-
-	[Header("UNDERWATER EFFECT")]
-	[SerializeField] bool UnderwaterEffect=true;
-	[SerializeField] bool ScreenOverlayFX=true;
-	public AudioClip Underwater;
-	public Texture[] LightCookie;
-	Vector3 defaultLightDir;
-	Color32 defaultFogColor;
-	float defaultFogDensity;
-	Color32 underwaterColor;
-	[SerializeField]  float UnderwaterDensity = 0.0f;
-	float screenWaterY;
-	int i=0, j=0; //Used for light cookie animation
-	bool enableFX=false;
 	[Header("WATER PARTICLES FX")]
-	[SerializeField] bool ParticlesEffect=true;
+	[SerializeField] bool useParticlesFx=true;
 	public ParticleSystem ripples;
 	public ParticleSystem splash;
-	public AudioClip Largesplash;
-	float count =0;
+	public AudioClip splashSnd;
+	private float count=0;
 
-	void Update()
-	{
-		if(WaterMaterial)
+  private void Start()
+  {
+		startFogDensity=RenderSettings.fogDensity;
+		startFogColor=RenderSettings.fogColor;
+    startLightDir=directionalLight.transform.forward;
+  }
+
+  private void OnWillRenderObject()
+  {
+		if(onRend | !Camera.current | !reflectionCamera | !waterMat) return;
+    if(reflectionRt==null | (reflectionRt&& reflectionRt.width!=resolution))
+		{ reflectionRt=RenderTexture.GetTemporary(resolution, resolution, 24); }
+		Camera cam=Camera.current;
+
+		Vector3 n=transform.up, p=transform.position; float l=-Vector3.Dot(n, p);
+		Matrix4x4 m=new Matrix4x4
 		{
-			if(WaterQuality > WaterQuality.Medium) WaterMaterial.shader.maximumLOD = 501;
-			else if(WaterQuality > WaterQuality.Low) WaterMaterial.shader.maximumLOD = 301;
-			else WaterMaterial.shader.maximumLOD = 201;
+			m00=1-2*n.x*n.x, m01=-2*n.x*n.y,  m02=-2*n.x*n.z,  m03=-2*l*n.x,
+			m10=-2*n.x*n.y,	 m11=1-2*n.y*n.y, m12=-2*n.y*n.z,  m13=-2*l*n.y,
+			m20=-2*n.x*n.z,  m21=-2*n.y*n.z,  m22=1-2*n.z*n.z, m23=-2*l*n.z,
+			m30=0, m31=0, m32=0, m33=1
+		};
+
+		//Set Cam
+		reflectionCamera.enabled=false;
+		Vector3 n2 =-cam.worldToCameraMatrix.MultiplyVector(n).normalized;
+		Vector4 clip=new Vector4(n2.x, n2.y, n2.z, -Vector3.Dot(cam.worldToCameraMatrix.MultiplyPoint((p+n)*0.9f), n2));
+		reflectionCamera.projectionMatrix=cam.CalculateObliqueMatrix(clip);
+		reflectionCamera.worldToCameraMatrix=cam.worldToCameraMatrix*m;
 			
-			if(DirectionalLight) WaterMaterial.SetVector("_DirectionalLightDir", DirectionalLight.transform.forward);
-	
-			if(!SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.Depth) | !EdgeBlend)
-			{
-				Shader.EnableKeyword("WATER_EDGEBLEND_OFF");
-				Shader.DisableKeyword("WATER_EDGEBLEND_ON");
-			}
-			else
-			{
-				Shader.EnableKeyword("WATER_EDGEBLEND_ON");
-				Shader.DisableKeyword("WATER_EDGEBLEND_OFF");
-				// just to make sure (some peeps might forget to add a water tile to the patches)
-				if(cam) cam.depthTextureMode |= DepthTextureMode.Depth;
-			}
-			
-			if(GerstnerDisplace)
-			{
-				Shader.EnableKeyword("WATER_VERTEX_DISPLACEMENT_ON");
-				Shader.DisableKeyword("WATER_VERTEX_DISPLACEMENT_OFF");
-			}
-			else
-			{
-				Shader.EnableKeyword("WATER_VERTEX_DISPLACEMENT_OFF");
-				Shader.DisableKeyword("WATER_VERTEX_DISPLACEMENT_ON");
-			}
+    reflectionCamera.clearFlags=cam.clearFlags;
+    reflectionCamera.backgroundColor=cam.backgroundColor;
+    reflectionCamera.farClipPlane=cam.farClipPlane;
+    reflectionCamera.nearClipPlane=cam.nearClipPlane;
+    reflectionCamera.orthographic=cam.orthographic;
+    reflectionCamera.fieldOfView=cam.fieldOfView;
+    reflectionCamera.aspect=cam.aspect;
+    reflectionCamera.orthographicSize=cam.orthographicSize;
+		reflectionCamera.targetTexture=reflectionRt;
+
+		reflectionCamera.transform.SetPositionAndRotation(cam.transform.position, cam.transform.rotation);
+    if(reflectionCamera.rect.size!=Vector2.one) return;
+		GL.invertCulling=true; reflectionCamera.Render(); GL.invertCulling=false;
+    
+		waterMat.SetTexture("_ReflectionRT", reflectionRt);
+		onRend=false;
+  }
+
+	//UNDERWATER EFFECT
+	private void FixedUpdate ()
+	{
+		Camera cam=Camera.current;
+		if(!Application.isPlaying | !useUnderwaterFx | !cam) return;
+
+    //Get screen water altitude
+    float d_l=cam.ScreenToWorldPoint(new Vector3(0, 0, cam.nearClipPlane)).y;
+		float u_l=cam.ScreenToWorldPoint(new Vector3(0, Screen.height, cam.nearClipPlane)).y;
+		float d_r=cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, cam.nearClipPlane)).y;
+		float u_r=cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, cam.nearClipPlane)).y;
+		screenWaterY=Mathf.Clamp( (Mathf.Min(d_l, d_r)-transform.position.y) / (Mathf.Min(d_l, d_r) - Mathf.Min(u_l, u_r)) , -16.0f, 16.0f);
+    //Get water material color
+    Color32 col=Color32.Lerp(waterMat.GetColor("_ReefCol"), waterMat.GetColor("_Col")*1.5f, screenWaterY/4f);
+    //Fog color & density
+    RenderSettings.fogColor=Color32.Lerp(startFogColor, col, Mathf.Clamp01(screenWaterY));
+    RenderSettings.fogDensity=Mathf.Lerp(startFogDensity, underwaterDensity, Mathf.Clamp01(screenWaterY));
+    cam.backgroundColor=RenderSettings.fogColor;
+		if(screenWaterY>0.5f)
+		{ 
+      if(!underwaterSnd.isPlaying)
+      {
+        underwaterSnd.Play(); // play underwater sound
+        sunflare.enabled=false; //Disable sun flare
+        cam.clearFlags=CameraClearFlags.SolidColor; // Set CameraClearFlags
+			  directionalLight.transform.forward=-Vector3.up; // Set light direction
+      }
+      if(lightCookie.Length>0)
+      directionalLight.cookie=lightCookie[Mathf.FloorToInt((Time.fixedTime*16)%lightCookie.Length)]; //Animate light cookie
 		}
-	}
-
-	// This is called when it's known that the object will be rendered by some
-	// camera. We render reflections and do other updates here.
-	// Because the script executes in edit mode, reflections for the scene view
-	// camera will just work!
-	void OnWillRenderObject()
-	{
-		if(!WaterMaterial | !cam | s_InsideWater) return;
-		// Safeguard from recursive water reflections.
-		s_InsideWater = true;
-		
-		Camera reflectionCamera;
-		CreateWaterObjects(cam, out reflectionCamera);
-		
-		// find out the reflection plane: position and normal in world space
-		Vector3 pos = transform.position;
-		Vector3 normal = transform.up;
-		
-		// Optionally disable pixel lights for reflection
-		int oldPixelLightCount = QualitySettings.pixelLightCount;
-		if(DisablePixelLights) QualitySettings.pixelLightCount = 0;
-		
-		UpdateCameraModes(cam, reflectionCamera);
-		
-		// Reflect camera around reflection plane
-		float d = -Vector3.Dot(normal, pos) - ClipPlaneOffset;
-		Vector4 reflectionPlane = new Vector4(normal.x, normal.y, normal.z, d);
-		
-		Matrix4x4 reflection = Matrix4x4.zero;
-		CalculateReflectionMatrix(ref reflection, reflectionPlane);
-		Vector3 oldpos = cam.transform.position;
-		Vector3 newpos = reflection.MultiplyPoint(oldpos);
-		reflectionCamera.worldToCameraMatrix = cam.worldToCameraMatrix * reflection;
-		
-		// Setup oblique projection matrix so that near plane is our reflection
-		// plane. This way we clip everything below/above it for free.
-		Vector4 clipPlane = CameraSpacePlane(reflectionCamera, pos, normal, 1.0f);
-		reflectionCamera.projectionMatrix = cam.CalculateObliqueMatrix(clipPlane);
-		
-		reflectionCamera.cullingMask = ~(1 << 4) & ReflectLayers.value; // never render water layer
-		reflectionCamera.targetTexture = m_ReflectionTexture;
-		GL.invertCulling = true;
-		reflectionCamera.transform.position = newpos;
-		Vector3 euler = cam.transform.eulerAngles;
-		reflectionCamera.transform.eulerAngles = new Vector3(-euler.x, euler.y, euler.z);
-
-    if (!reflectionCamera.orthographic) reflectionCamera.Render();
-		reflectionCamera.transform.position = oldpos;
-		GL.invertCulling = false;
-		GetComponent<Renderer>().sharedMaterial.SetTexture("_ReflectionTex", m_ReflectionTexture);
-		
-		// Restore pixel light count
-		if(DisablePixelLights) QualitySettings.pixelLightCount = oldPixelLightCount;
-		s_InsideWater = false;
-	}
-
-	// Cleanup all the objects we possibly have created
-	void OnDisable()
-	{
-		if(m_ReflectionTexture)
-		{
-			DestroyImmediate(m_ReflectionTexture);
-			m_ReflectionTexture = null;
-		}
-		
-		foreach (var kvp in m_ReflectionCameras)
-		{
-			DestroyImmediate((kvp.Value).gameObject);
-		}
-		m_ReflectionCameras.Clear();
-	}
-
-	void UpdateCameraModes(Camera src, Camera dest)
-	{
-		if(dest == null) return;
-
-		// set water camera to clear the same way as current camera
-		dest.clearFlags = src.clearFlags;
-		dest.backgroundColor = src.backgroundColor;
-		
-
-		// update other values to match current camera.
-		// even ifwe are supplying custom camera&projection matrices, 
-		// some of values are used elsewhere (e.g. skybox uses far plane)
-		dest.farClipPlane = src.farClipPlane;
-		dest.nearClipPlane = src.nearClipPlane;
-		dest.orthographic = src.orthographic;
-		dest.fieldOfView = src.fieldOfView;
-		dest.aspect = src.aspect;
-		dest.orthographicSize = src.orthographicSize;
-	}
-	
-	// On-demand create any objects we need for water
-	void CreateWaterObjects(Camera currentCamera, out Camera reflectionCamera)
-	{
-		reflectionCamera = null;
-			// Reflection render texture
-			if(!m_ReflectionTexture | m_OldReflectionTextureSize != ReflectionSize)
-			{
-				if(m_ReflectionTexture)
-				{
-					DestroyImmediate(m_ReflectionTexture);
-				}
-				m_ReflectionTexture = new RenderTexture(ReflectionSize, ReflectionSize, 16);
-				m_ReflectionTexture.name = "__WaterReflection" + GetInstanceID();
-				m_ReflectionTexture.isPowerOfTwo = true;
-				m_ReflectionTexture.hideFlags = HideFlags.DontSave;
-				m_OldReflectionTextureSize = ReflectionSize;
-			}
-			// Camera for reflection
-			m_ReflectionCameras.TryGetValue(currentCamera, out reflectionCamera);
-			if(!reflectionCamera) // catch both not-in-dictionary and in-dictionary-but-deleted-GO
-			{
-				GameObject go = new GameObject("Water Refl Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(), typeof(Camera), typeof(Skybox));
-				reflectionCamera = go.GetComponent<Camera>();
-				reflectionCamera.enabled = false;
-				reflectionCamera.transform.position = transform.position;
-				reflectionCamera.transform.rotation = transform.rotation;
-				reflectionCamera.gameObject.AddComponent<FlareLayer>();
-				go.hideFlags = HideFlags.HideAndDontSave;
-				m_ReflectionCameras[currentCamera] = reflectionCamera;
-			}
-	}
-
-	// Given position/normal of the plane, calculates plane in camera space.
-	Vector4 CameraSpacePlane(Camera cam, Vector3 pos, Vector3 normal, float sideSign)
-	{
-		Vector3 offsetPos = pos + normal * ClipPlaneOffset;
-		Matrix4x4 m = cam.worldToCameraMatrix;
-		Vector3 cpos = m.MultiplyPoint(offsetPos);
-		Vector3 cnormal = m.MultiplyVector(normal).normalized * sideSign;
-		return new Vector4(cnormal.x, cnormal.y, cnormal.z, -Vector3.Dot(cpos, cnormal));
-	}
-	
-	// Calculates reflection matrix around the given plane
-	static void CalculateReflectionMatrix(ref Matrix4x4 reflectionMat, Vector4 plane)
-	{
-		reflectionMat.m00 = (1F - 2F * plane[0] * plane[0]);
-		reflectionMat.m01 = (- 2F * plane[0] * plane[1]);
-		reflectionMat.m02 = (- 2F * plane[0] * plane[2]);
-		reflectionMat.m03 = (- 2F * plane[3] * plane[0]);
-		
-		reflectionMat.m10 = (- 2F * plane[1] * plane[0]);
-		reflectionMat.m11 = (1F - 2F * plane[1] * plane[1]);
-		reflectionMat.m12 = (- 2F * plane[1] * plane[2]);
-		reflectionMat.m13 = (- 2F * plane[3] * plane[1]);
-		
-		reflectionMat.m20 = (- 2F * plane[2] * plane[0]);
-		reflectionMat.m21 = (- 2F * plane[2] * plane[1]);
-		reflectionMat.m22 = (1F - 2F * plane[2] * plane[2]);
-		reflectionMat.m23 = (- 2F * plane[3] * plane[2]);
-		
-		reflectionMat.m30 = 0F;
-		reflectionMat.m31 = 0F;
-		reflectionMat.m32 = 0F;
-		reflectionMat.m33 = 1F;
+    else if(underwaterSnd.isPlaying)
+    {
+      underwaterSnd.Stop(); //Stop underwater sound 
+      sunflare.enabled=true; //Enable sun flare
+      cam.clearFlags=CameraClearFlags.Skybox;	// Reset CameraClearFlags
+      directionalLight.transform.forward=startLightDir; // Reset light direction
+      directionalLight.cookie=null; // Remove light cookie
+    }
 	}
 
 
-//*************************************************************************************************************************************************
-//UNDERWATER & PARTICLES EFFECT 
+	//PARTICLES EFFECT
+	private void OnTriggerStay(Collider col) { if(!useParticlesFx) return; WaterParticleFX(col, ripples); }
+	private void OnTriggerExit(Collider col) { if(!useParticlesFx) return; WaterParticleFX(col, splash); }
+	private void OnTriggerEnter(Collider col) { if(!useParticlesFx) return; WaterParticleFX(col, splash); }
 
-	void OnGUI ()
+	private void WaterParticleFX(Collider col, ParticleSystem particleFx)
 	{
-		if(!Application.isPlaying | !UnderwaterEffect | !ScreenOverlayFX | !enableFX) return;
+		count+=Time.fixedDeltaTime; ParticleSystem particle; Creature cs;
 
-		//Screen overlay water FX
-		if(screenWaterY>0.0f)
-		{
-			if(!cam) return;
-			Texture2D pic= new Texture2D (2, 2, TextureFormat.ARGB32, false);
-			Color UnderWaterScreen = underwaterColor;
-			UnderWaterScreen.a=Mathf.Clamp(1.0f-(screenWaterY-1.0f), 0.0f, 0.99f);
-			Color[] ScreenCol= new Color[] {UnderWaterScreen, UnderWaterScreen, UnderWaterScreen, UnderWaterScreen};
-			pic.SetPixels(ScreenCol);
-
-			GUI.depth=100;
-			GUI.DrawTexture(new Rect(0, Screen.height, Screen.width, Screen.height*-screenWaterY), pic);
-		}
-	}
-
-	void LateUpdate()
-	{
-		if(!Application.isPlaying | !UnderwaterEffect) return;
-
-		if(!cam) return;
-		float d_l = cam.ScreenToWorldPoint(new Vector3(0, 0, cam.nearClipPlane)).y;
-		float u_l = cam.ScreenToWorldPoint(new Vector3(0, Screen.height, cam.nearClipPlane)).y;
-		float d_r = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, cam.nearClipPlane)).y;
-		float u_r = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, cam.nearClipPlane)).y;
-		screenWaterY = Mathf.Clamp( (Mathf.Min(d_l, d_r)-transform.position.y) / (Mathf.Min(d_l, d_r) - Mathf.Min(u_l, u_r)) , -10.0f, 10.0f);
-
-
-		if(!enableFX)
-		{
-			if(WaterMaterial)
-			{
-				defaultLightDir=DirectionalLight.transform.forward;
-				defaultFogColor=RenderSettings.fogColor;
-				defaultFogDensity=RenderSettings.fogDensity;
-				underwaterColor= WaterMaterial.GetColor("_BaseColor");
-				enableFX=true;
-			}
-		}
-		else
-		{
-			if(screenWaterY>1.0f)
-			{
-				//Play water sound FX
-				if(cam.transform.root.GetComponent<AudioSource>())
-				{
-					cam.transform.root.GetComponent<AudioSource>().clip=Underwater;
-					if(cam.transform.root.GetComponent<AudioSource>().isPlaying)
-					{ cam.transform.root.GetComponent<AudioSource>().volume =0.5f; cam.transform.root.GetComponent<AudioSource>().pitch=0.5f; } 
-					else cam.transform.root.GetComponent<AudioSource>().PlayOneShot(Underwater);
-				}
-
-				//Disable flare layer
-				if(cam.GetComponent<FlareLayer>()) cam.GetComponent<FlareLayer>().enabled = false; 
-
-				// Setup fog
-				RenderSettings.fogColor = Color32.Lerp(RenderSettings.fogColor, underwaterColor, 1.0f);
-				RenderSettings.fogDensity = UnderwaterDensity;
-
-				//Setup camera background
-				cam.clearFlags=CameraClearFlags.SolidColor;
-				cam.backgroundColor = underwaterColor;
-
-				//Animate light cookie and rotate light
-				if(DirectionalLight && LightCookie.Length>0)
-				{
-					if(DirectionalLight.transform.forward==defaultLightDir) DirectionalLight.transform.forward=-Vector3.up;
-					if(j>2) { if(i==LightCookie.Length) i=0; DirectionalLight.cookie=LightCookie[i]; i++; j=0; } else j++; 
-				}
-			}
-
-			else if(screenWaterY<=1.0f)
-			{
-				//Stop water sound FX
-				if(cam.transform.root.GetComponent<AudioSource>() && cam.transform.root.GetComponent<AudioSource>().clip==Underwater)
-				cam.transform.root.GetComponent<AudioSource>().clip=null;
-
-				//Enable flare layer
-				if(cam.GetComponent<FlareLayer>()) cam.GetComponent<FlareLayer>().enabled = true;
-			
-				// Restore fog
-				RenderSettings.fogColor = Color32.Lerp(RenderSettings.fogColor, defaultFogColor, 1.0f);
-				RenderSettings.fogDensity = defaultFogDensity;
-
-				//Restore camera background
-				cam.clearFlags=CameraClearFlags.Skybox;
-				cam.backgroundColor = defaultFogColor;
-
-				//Disable light cookie and rotate light
-				if(DirectionalLight && LightCookie.Length>0)
-				{
-					if(DirectionalLight.transform.forward==-Vector3.up) DirectionalLight.transform.forward=defaultLightDir;
-					Texture blank=null; if(DirectionalLight.cookie) DirectionalLight.cookie =blank;
-				}
-			}
-		}
-
-	}
-
-	void OnTriggerStay(Collider col) { if(!ParticlesEffect) return; WaterParticleFX(col, ripples); }
-	void OnTriggerExit(Collider col) { if(!ParticlesEffect) return; WaterParticleFX(col, splash); }
-	void OnTriggerEnter(Collider col) { if(ParticlesEffect) WaterParticleFX(col, splash); }
-
-	//Spawn water particle FX
-	void WaterParticleFX(Collider col, ParticleSystem particleFx)
-	{
-		count+=Time.fixedDeltaTime;
-		ParticleSystem particle=null; shared creatureScript=null;
-
-		//Check if object has a Rigidbody component
+		//Has a Rigidbody component ?
 		if(col.transform.root.GetComponent<Rigidbody>())
 		{
-			//Check his tag (must be a JP Creature with "shared" script attached)
-			if(col.transform.root.tag == "Creature")
+			//Is a JP Creature?
+			if(col.transform.root.CompareTag("Creature"))
 			{
-				creatureScript=col.transform.root.GetComponent<shared>(); //Get creature script
-				creatureScript.waterY=transform.position.y; //Set creature current water layer altitude
-				if(!creatureScript.IsVisible) return; //Check if creature is visible
-				if(particleFx==ripples && count<creatureScript.loop%5) return; //prevent particle overflow
-				SkinnedMeshRenderer rend =  creatureScript.rend[0];
+				cs=col.transform.root.GetComponent<Creature>(); //Get creature script
+				cs.waterY=transform.position.y; //water altitude
+				if(!cs.isVisible) return; //Check if creature is visible
+				if(particleFx==ripples && count<cs.loop%10) return; //prevent particle overflow
+				SkinnedMeshRenderer rend= cs.rend[0];
 
 				//Check if the creature bounds are in contact with the water surface
 				if(rend.bounds.Contains(new Vector3(col.transform.position.x, transform.position.y, col.transform.position.z)))
 				{
-					//Check if the creature rigidbody are in motion
-					if(!creatureScript.anm.GetInteger("Move").Equals(0) |
-						(creatureScript.CanFly && creatureScript.OnLevitation) | creatureScript.IsJumping | creatureScript.IsAttacking)
+					//Check if the creature are in motion
+					if(!cs.anm.GetInteger("Move").Equals(0) | (cs.canFly && cs.isOnLevitation) | cs.onJump | cs.onAttack)
 					{
-						if(particleFx==splash && (!creatureScript.IsOnGround | creatureScript.IsJumping) )
+						if(particleFx==splash&&(!cs.isOnGround | cs.onJump))
 						{
-							col.transform.root.GetComponents<AudioSource>()[1].pitch=Random.Range(0.5f, 0.75f); 
-							col.transform.root.GetComponents<AudioSource>()[1].PlayOneShot(Largesplash, Random.Range(0.5f, 0.75f));
+							col.transform.root.GetComponents<AudioSource>()[1].pitch=Random.Range(0.5f,0.75f);
+							col.transform.root.GetComponents<AudioSource>()[1].PlayOneShot(splashSnd,Random.Range(0.5f,0.75f));
 						} else particleFx=ripples;
-					} else return;
-
-					//The spawn position
-					Vector2 pos=new Vector2(rend.bounds.center.x, rend.bounds.center.z);
-
-					//Spawn the particle prefab
-					particle=Instantiate(particleFx, new Vector3(pos.x, transform.position.y+0.01f, pos.y), Quaternion.Euler(-90, 0, 0)) as ParticleSystem;
-					//Set particle size relative to creature size x
-					float size=rend.bounds.size.magnitude/10;
-					//particle.transform.localScale=new Vector3(size,size, size);
-					particle.transform.localScale=new Vector3(size,size, size);
-
-					//Destroy particle after 3 sec
-					Destroy(particle.gameObject, 3.0f);
+					}
+					else return;
+					
+					//Spawn particle 
+					Vector3 pos=new Vector3(rend.bounds.center.x, cs.waterY+0.01f, rend.bounds.center.z); //spawn position
+					particle=Instantiate(particleFx, pos, Quaternion.identity) as ParticleSystem;
+					particle.gameObject.hideFlags=HideFlags.HideAndDontSave;
+					particle.transform.localScale=rend.bounds.size/10f; //Set particle size relative to creature size x
+					Destroy(particle.gameObject, 3.0f); //Destroy particle after 3 sec
 					count=0;
 				}
 			}
@@ -395,4 +164,3 @@ public class JPWater : MonoBehaviour
 	}
 
 }
-

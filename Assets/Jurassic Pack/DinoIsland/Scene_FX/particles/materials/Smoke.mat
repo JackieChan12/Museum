@@ -5,15 +5,15 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Smoke
   m_Shader: {fileID: 4800000, guid: a1c2c90df8516d84aba29cb5e5a5f94a, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
-    _ZWRITE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2900
+  m_CustomRenderQueue: 2600
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -91,7 +91,7 @@ Material:
     - _SpecularHighlights: 0
     - _SrcBlend: 5
     - _UVSec: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
     - _AnimationDirection: {r: 1, g: 1, b: 1, a: 1}
     - _AnimationTiling: {r: 2.2, g: 2.2, b: -1.1, a: -1.1}
@@ -118,3 +118,4 @@ Material:
     - _SpecularColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
     - _TintColor: {r: 0, g: 0, b: 0, a: 1}
     - _WorldLightDir: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

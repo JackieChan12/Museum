@@ -5,14 +5,15 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Ripples
   m_Shader: {fileID: 4800000, guid: a1c2c90df8516d84aba29cb5e5a5f94a, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -46,6 +47,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,13 +61,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AO: 0
+    - _Alpha: 1
     - _BaseLight: 0.021
     - _BumpScale: 1
     - _Cutoff: 0.25
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _Glossiness: 0.5
-    - _Glow: 1
+    - _Glow: 2
     - _InvFade: 3
     - _Metallic: 0
     - _Mode: 3
@@ -81,3 +87,4 @@ Material:
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
