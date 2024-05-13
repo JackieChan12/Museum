@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: 'Model '
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: 'Model '
   m_Data:
     m_SerializedData: []
   m_GUID: 9be6c8a41bff51744a4ff2e490e06ab3
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 206ab55482a1af44fb6b70f1bb8da5da
+    m_Address: Assets/Jurassic Pack/Sounds
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc52c48d75e08a74faf0e88ca10369bc
+    m_Address: Assets/Jurassic Pack/Creatures/Models
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7846c8edce552fc48ad5df3e3140ae0e, type: 2}
   m_SchemaSet:
