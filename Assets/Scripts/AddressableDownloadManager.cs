@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
@@ -9,7 +10,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 //using jp.co.mirabo.Application.RoomManagement;
 
-public class AddressableDownloadManager : SingletonMonoBehaviour<AddressableDownloadManager>
+public class AddressableDownloadManager : SingletonMonoBehavior<AddressableDownloadManager>
 {
     public const string preloadLabel = "preload_assets";
     public const string preloadLabelv2 = "preload_assets_ver2";
@@ -31,7 +32,7 @@ public class AddressableDownloadManager : SingletonMonoBehaviour<AddressableDown
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        DebugExtension.Log("InitializeAsync Addressable !!!");
+        //DebugExtension.Log("InitializeAsync Addressable !!!");
         Addressables.InitializeAsync().Completed += AddressablesOnComplete;
     }
     private void Awake()
@@ -51,7 +52,7 @@ public class AddressableDownloadManager : SingletonMonoBehaviour<AddressableDown
 
     void AddressablesOnComplete(AsyncOperationHandle<IResourceLocator> obj)
     {
-        DebugExtension.Log("InitializeAsync Addressable DONE!!!");
+        //DebugExtension.Log("InitializeAsync Addressable DONE!!!");
         OnInitSuccess?.Invoke();
         if (isAutoLoad) StartLoadData();
     }
@@ -86,8 +87,16 @@ public class AddressableDownloadManager : SingletonMonoBehaviour<AddressableDown
         string asset = "Assets/AddressableData/LoadResourceAddessable.asset";
         var assethanlder = Addressables.LoadAssetAsync<LoadResourceAddessable>(asset);
         await assethanlder;
-        ResourcesData = assethanlder.Result;
+        LoadResourceAddessable ResourcesData = assethanlder.Result;
         await ResourcesData.PrepareData();
         CompletionEvent?.Invoke(true);
+    }
+}
+
+internal class LoadResourceAddessable
+{
+    internal async Task PrepareData()
+    {
+        throw new NotImplementedException();
     }
 }
