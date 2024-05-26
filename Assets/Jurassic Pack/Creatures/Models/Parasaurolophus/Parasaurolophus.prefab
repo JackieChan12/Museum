@@ -771,6 +771,7 @@ GameObject:
   - component: {fileID: 8280866}
   - component: {fileID: 11435004}
   - component: {fileID: 11486746}
+  - component: {fileID: 4366877136904763648}
   m_Layer: 0
   m_Name: Parasaurolophus
   m_TagString: Creature
@@ -1071,7 +1072,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bca7cdfdafe49d343a30561a6ae1726a, type: 3}
   m_Name: 
@@ -1098,7 +1099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846732faa4140374da4cf31dbbfc52e2, type: 3}
   m_Name: 
@@ -1192,6 +1193,19 @@ MonoBehaviour:
   vectorTGT: {x: 0, y: 0, z: 0}
   fixedHeadPos: {x: 0, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
+--- !u!114 &4366877136904763648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &154562
 GameObject:
   m_ObjectHideFlags: 0

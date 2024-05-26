@@ -1386,6 +1386,7 @@ GameObject:
   - component: {fileID: 9578484}
   - component: {fileID: 11495636}
   - component: {fileID: 11443306}
+  - component: {fileID: -8081980831241489095}
   m_Layer: 0
   m_Name: Dimetrodon
   m_TagString: Creature
@@ -1686,7 +1687,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e1db59aec84f8d41b83b57802bbe5d7, type: 3}
   m_Name: 
@@ -1714,7 +1715,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846732faa4140374da4cf31dbbfc52e2, type: 3}
   m_Name: 
@@ -1808,6 +1809,19 @@ MonoBehaviour:
   vectorTGT: {x: 0, y: 0, z: 0}
   fixedHeadPos: {x: 0, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
+--- !u!114 &-8081980831241489095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &136972
 GameObject:
   m_ObjectHideFlags: 0

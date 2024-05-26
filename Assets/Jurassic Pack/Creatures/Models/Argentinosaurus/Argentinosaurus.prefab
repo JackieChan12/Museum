@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 6829318334373044973}
   - component: {fileID: 244825780283090051}
   - component: {fileID: 7623594727434991732}
+  - component: {fileID: 2854558031400218855}
   m_Layer: 9
   m_Name: Argentinosaurus
   m_TagString: Creature
@@ -1975,7 +1976,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7735568550335834324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3f243a4e2ba644db7a5f21a1cce07a, type: 3}
   m_Name: 
@@ -2152,6 +2153,19 @@ MonoBehaviour:
   Arge2: {fileID: 8300000, guid: 62e9ebdcd0458a349a1d6133d62bf284, type: 3}
   Arge3: {fileID: 8300000, guid: 6f9a35c146fe0e146b456eceeeb30766, type: 3}
   Arge4: {fileID: 8300000, guid: 0125ae9a7a68d72488bca73391b2f0a4, type: 3}
+--- !u!114 &2854558031400218855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735568550335834324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &7735568550335834326
 GameObject:
   m_ObjectHideFlags: 0

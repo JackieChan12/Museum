@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 8298922}
   - component: {fileID: 8212648}
   - component: {fileID: 11438276}
+  - component: {fileID: -6617720261094500605}
   m_Layer: 9
   m_Name: Dimorphodon
   m_TagString: Creature
@@ -1198,7 +1199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123532}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47767f9586b11154e8574bccfd0ba2e3, type: 3}
   m_Name: 
@@ -1360,6 +1361,19 @@ MonoBehaviour:
   Dimo1: {fileID: 8300000, guid: c8ebf05bb996e6e4ab1e8a0ee26d65d0, type: 3}
   Dimo2: {fileID: 8300000, guid: 16c98b17cb6a83f4d80276a927290278, type: 3}
   Dimo3: {fileID: 8300000, guid: 19cd2147097e61c428c4521874489ff1, type: 3}
+--- !u!114 &-6617720261094500605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &125196
 GameObject:
   m_ObjectHideFlags: 0

@@ -1964,6 +1964,7 @@ GameObject:
   - component: {fileID: 8256860}
   - component: {fileID: 11481832}
   - component: {fileID: 11496302}
+  - component: {fileID: 9053505834763270305}
   m_Layer: 0
   m_Name: Oviraptor
   m_TagString: Creature
@@ -2268,7 +2269,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798e6b497ebd68c4780a680e35b44aec, type: 3}
   m_Name: 
@@ -2295,7 +2296,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846732faa4140374da4cf31dbbfc52e2, type: 3}
   m_Name: 
@@ -2390,6 +2391,19 @@ MonoBehaviour:
   vectorTGT: {x: 0, y: 0, z: 0}
   fixedHeadPos: {x: 0, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
+--- !u!114 &9053505834763270305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &163506
 GameObject:
   m_ObjectHideFlags: 0

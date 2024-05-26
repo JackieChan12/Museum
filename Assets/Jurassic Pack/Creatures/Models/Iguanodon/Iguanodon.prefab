@@ -1040,6 +1040,7 @@ GameObject:
   - component: {fileID: 8260740}
   - component: {fileID: 8281598}
   - component: {fileID: 11473760}
+  - component: {fileID: -8549702503228303684}
   m_Layer: 9
   m_Name: Iguanodon
   m_TagString: Creature
@@ -1340,7 +1341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155626}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec5a4409cc39d1a4d990cef309136e7c, type: 3}
   m_Name: 
@@ -1506,6 +1507,19 @@ MonoBehaviour:
   Igua1: {fileID: 8300000, guid: e178be2f2f9e2e440a94d769b06d4a79, type: 3}
   Igua2: {fileID: 8300000, guid: fb7b8f494272dd44c82432be798234bb, type: 3}
   Igua3: {fileID: 8300000, guid: 8810a2159c1b6f745b2b92273418134f, type: 3}
+--- !u!114 &-8549702503228303684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &160146
 GameObject:
   m_ObjectHideFlags: 0

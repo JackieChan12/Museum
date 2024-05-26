@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8205976}
   - component: {fileID: 8215194}
   - component: {fileID: 11411424}
+  - component: {fileID: -6679020849888082722}
   m_Layer: 9
   m_Name: Styracosaurus
   m_TagString: Creature
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aa0424562ad5f04fa85784039ed60c8, type: 3}
   m_Name: 
@@ -664,6 +665,19 @@ MonoBehaviour:
   Styra2: {fileID: 8300000, guid: b9ef12f83a6311b4baa608447f594e31, type: 3}
   Styra3: {fileID: 8300000, guid: cb97013241b5cb9459d3228ac6d515f9, type: 3}
   Styra4: {fileID: 8300000, guid: c6b3635c12138a74d9da3168a23fcadb, type: 3}
+--- !u!114 &-6679020849888082722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &111598
 GameObject:
   m_ObjectHideFlags: 0

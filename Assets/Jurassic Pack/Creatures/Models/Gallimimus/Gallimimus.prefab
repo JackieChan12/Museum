@@ -1066,6 +1066,7 @@ GameObject:
   - component: {fileID: 8271554}
   - component: {fileID: 8219746}
   - component: {fileID: 11409110}
+  - component: {fileID: 8970178105074080949}
   m_Layer: 9
   m_Name: Gallimimus
   m_TagString: Creature
@@ -1366,7 +1367,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135072}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dc2eadcce4bdf44e8413a5d426261e9, type: 3}
   m_Name: 
@@ -1531,6 +1532,19 @@ MonoBehaviour:
   Galli2: {fileID: 8300000, guid: 30f7d1c821632394092f622bed4f32d6, type: 3}
   Galli3: {fileID: 8300000, guid: e8079951b1d651447b3ee127c82df08b, type: 3}
   Galli4: {fileID: 8300000, guid: b4d0a62c3f2a5614988b0c922010524d, type: 3}
+--- !u!114 &8970178105074080949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &135558
 GameObject:
   m_ObjectHideFlags: 0

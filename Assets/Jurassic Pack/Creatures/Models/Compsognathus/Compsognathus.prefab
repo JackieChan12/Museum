@@ -2304,6 +2304,7 @@ GameObject:
   - component: {fileID: 8209312}
   - component: {fileID: 11490108}
   - component: {fileID: 11453944}
+  - component: {fileID: -4526359777340665321}
   m_Layer: 0
   m_Name: Compsognathus
   m_TagString: Creature
@@ -2604,7 +2605,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f119f820e167345bfd26becf760536, type: 3}
   m_Name: 
@@ -2628,7 +2629,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846732faa4140374da4cf31dbbfc52e2, type: 3}
   m_Name: 
@@ -2722,6 +2723,19 @@ MonoBehaviour:
   vectorTGT: {x: 0, y: 0, z: 0}
   fixedHeadPos: {x: 0, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
+--- !u!114 &-4526359777340665321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &190862
 GameObject:
   m_ObjectHideFlags: 0

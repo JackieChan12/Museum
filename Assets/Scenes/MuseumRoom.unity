@@ -11829,8 +11829,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1491147418}
   - component: {fileID: 1491147417}
+  - component: {fileID: 1491147419}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11843,7 +11844,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491147416}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb5d59631a7cd3c4f9ddedfbd23ada09, type: 3}
   m_Name: 
@@ -11866,6 +11867,46 @@ Transform:
   - {fileID: 1678952520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491147419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491147416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56007a443d29494c8fa9e5a4e99ecfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dinoModels:
+  - {fileID: 112872, guid: 82bb265eee524974e8bc69b2894e770c, type: 3}
+  - {fileID: 7735568550335834324, guid: af03bd2a5f214ab4c895585b3dd6bdf3, type: 3}
+  - {fileID: 174434, guid: a4f0263c44a11524ca41e0378a01101d, type: 3}
+  - {fileID: 140742, guid: 61871d595a5e3314da6f98e02c2502cd, type: 3}
+  - {fileID: 116090, guid: 1aa5bf18e7f88b345b6acc7d22d0f4b9, type: 3}
+  - {fileID: 190042, guid: 1e7a3a8f4618b3c4bae87a8ff1b36572, type: 3}
+  - {fileID: 159912, guid: 17614522c465b4340ae4a0f6ae00f890, type: 3}
+  - {fileID: 136282, guid: cbeb056942552d14e8f4b48f46fbb24f, type: 3}
+  - {fileID: 123532, guid: 59fdba479f9536142b56997fff1a2008, type: 3}
+  - {fileID: 135072, guid: 1c46c58f8a4fddb4aa46f06e094b1098, type: 3}
+  - {fileID: 155626, guid: cf92ac12584cae643a63a1dc2a14a948, type: 3}
+  - {fileID: 129350, guid: de5fff96cfb90c44e93a510aea98a6ee, type: 3}
+  - {fileID: 176890, guid: 3b8f87d65dad680439bf99455d68d060, type: 3}
+  - {fileID: 163140, guid: 940c971688e966645b4f03bc29edd63d, type: 3}
+  - {fileID: 105508, guid: 1d6aa9389e6bb0c4cb108309921db15f, type: 3}
+  - {fileID: 153918, guid: 6ffda9ff55f086e4989238376579c70b, type: 3}
+  - {fileID: 148322, guid: 82a6d0bdbc518574ab52f80d7319ed7a, type: 3}
+  - {fileID: 136898, guid: 2b1d4f320a11976429d444e37260618f, type: 3}
+  - {fileID: 126298, guid: ea9487b42ea29554ea5a6e9b5b6f4374, type: 3}
+  - {fileID: 184168, guid: 44fbd1f3d1065904985f9094d7da6b24, type: 3}
+  - {fileID: 191346, guid: 3a56de87a8b02b043b1774a0dd9c27a2, type: 3}
+  - {fileID: 109006, guid: 892e9d6218119dd4fa0aeb2af26e9aa1, type: 3}
+  - {fileID: 157268, guid: 9b2f31ea69c85bd4fb6282fe8e7853d0, type: 3}
+  - {fileID: 129294, guid: 1d3e5c0e4f69427409dd66c91058b8d8, type: 3}
+  - {fileID: 156200, guid: 202d57994ff2d504c80a7dd050a5b7ff, type: 3}
+  - {fileID: 159354, guid: 2948cc3fb08fe0246970faaaf2d7ca6b, type: 3}
+  listModelCurrent: []
 --- !u!1 &1491483386 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7467349912599597248, guid: 1d30282f0cab48142bee0f9ec76e25d8, type: 3}

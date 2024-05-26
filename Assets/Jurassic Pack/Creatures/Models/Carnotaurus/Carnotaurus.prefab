@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 8294582}
   - component: {fileID: 8299804}
   - component: {fileID: 11455794}
+  - component: {fileID: 1838069931819793770}
   m_Layer: 9
   m_Name: Carnotaurus
   m_TagString: Creature
@@ -792,7 +793,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 389befaa4b46ac34d9023db28f0423ea, type: 3}
   m_Name: 
@@ -946,6 +947,19 @@ MonoBehaviour:
   Carn2: {fileID: 8300000, guid: 8b9e52ae507b2504bbc274194602b4f4, type: 3}
   Carn3: {fileID: 8300000, guid: 2d214f375171ac3498fdd7e01d01d443, type: 3}
   Carn4: {fileID: 8300000, guid: 605cf1196f116404cbe4dd5933d1ff87, type: 3}
+--- !u!114 &1838069931819793770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e2a9737b0b5f47b76e94649060761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &116770
 GameObject:
   m_ObjectHideFlags: 0
