@@ -1263,7 +1263,7 @@ GameObject:
   - component: {fileID: 11483052}
   - component: {fileID: 11483036}
   - component: {fileID: -6760569425322102339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tyrannosaurus Rex
   m_TagString: Creature
   m_Icon: {fileID: 0}

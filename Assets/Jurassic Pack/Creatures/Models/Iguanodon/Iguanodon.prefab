@@ -1041,7 +1041,7 @@ GameObject:
   - component: {fileID: 8281598}
   - component: {fileID: 11473760}
   - component: {fileID: -8549702503228303684}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Iguanodon
   m_TagString: Creature
   m_Icon: {fileID: 0}

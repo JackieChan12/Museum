@@ -1505,7 +1505,7 @@ GameObject:
   - component: {fileID: 8299416}
   - component: {fileID: 11474280}
   - component: {fileID: 5002273166179771020}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Baryonyx
   m_TagString: Creature
   m_Icon: {fileID: 0}

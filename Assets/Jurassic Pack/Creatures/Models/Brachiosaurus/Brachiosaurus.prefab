@@ -1189,7 +1189,7 @@ GameObject:
   - component: {fileID: 11429576}
   - component: {fileID: 11434318}
   - component: {fileID: 8804354701528499803}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Brachiosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

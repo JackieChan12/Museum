@@ -1676,7 +1676,8 @@ GameObject:
   - component: {fileID: 244825780283090051}
   - component: {fileID: 7623594727434991732}
   - component: {fileID: 2854558031400218855}
-  m_Layer: 9
+  - component: {fileID: -6388529938017456178}
+  m_Layer: 8
   m_Name: Argentinosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}
@@ -2166,6 +2167,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+--- !u!64 &-6388529938017456178
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735568550335834324}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 57f518c2a6dc87a40940ef965b2c8459, type: 3}
 --- !u!1 &7735568550335834326
 GameObject:
   m_ObjectHideFlags: 0

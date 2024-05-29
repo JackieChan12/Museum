@@ -1963,7 +1963,7 @@ GameObject:
   - component: {fileID: 11415876}
   - component: {fileID: 11484050}
   - component: {fileID: 3538867675534212319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stegosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 8212648}
   - component: {fileID: 11438276}
   - component: {fileID: -6617720261094500605}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Dimorphodon
   m_TagString: Creature
   m_Icon: {fileID: 0}

@@ -2305,7 +2305,7 @@ GameObject:
   - component: {fileID: 11490108}
   - component: {fileID: 11453944}
   - component: {fileID: -4526359777340665321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Compsognathus
   m_TagString: Creature
   m_Icon: {fileID: 0}

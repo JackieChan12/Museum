@@ -1723,7 +1723,7 @@ GameObject:
   - component: {fileID: 8203708}
   - component: {fileID: 11487190}
   - component: {fileID: -6289967256213682383}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Ouranosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

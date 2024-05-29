@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 8215194}
   - component: {fileID: 11411424}
   - component: {fileID: -6679020849888082722}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Styracosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

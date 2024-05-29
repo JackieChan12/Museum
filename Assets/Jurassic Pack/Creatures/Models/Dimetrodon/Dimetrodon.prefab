@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 11495636}
   - component: {fileID: 11443306}
   - component: {fileID: -8081980831241489095}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dimetrodon
   m_TagString: Creature
   m_Icon: {fileID: 0}

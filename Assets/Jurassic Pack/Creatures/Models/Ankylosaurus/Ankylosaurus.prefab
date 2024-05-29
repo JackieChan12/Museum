@@ -81,7 +81,8 @@ GameObject:
   - component: {fileID: 11418808}
   - component: {fileID: 11458944}
   - component: {fileID: 2823641808802238886}
-  m_Layer: 0
+  - component: {fileID: -290121949559296671}
+  m_Layer: 8
   m_Name: Ankylosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}
@@ -247,7 +248,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -262,7 +263,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -277,7 +278,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!82 &8220610
 AudioSource:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -358,7 +359,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -373,7 +374,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &11418808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +516,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+--- !u!64 &-290121949559296671
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: c3633ed157ad70b4daba0326c9e5d0da, type: 3}
 --- !u!1 &113444
 GameObject:
   m_ObjectHideFlags: 0

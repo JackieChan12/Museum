@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8225164}
   - component: {fileID: 11466624}
   - component: {fileID: 7228534616500404039}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Pachycephalosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

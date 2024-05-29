@@ -1827,7 +1827,7 @@ GameObject:
   - component: {fileID: 11446016}
   - component: {fileID: 11428202}
   - component: {fileID: -2172305733478385728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spinosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

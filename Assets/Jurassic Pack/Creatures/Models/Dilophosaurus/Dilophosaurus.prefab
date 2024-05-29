@@ -2321,7 +2321,7 @@ GameObject:
   - component: {fileID: 11478570}
   - component: {fileID: 11495464}
   - component: {fileID: 652068014755041737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dilophosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 8207552}
   - component: {fileID: 11465984}
   - component: {fileID: 143403277091008809}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Protoceratops
   m_TagString: Creature
   m_Icon: {fileID: 0}

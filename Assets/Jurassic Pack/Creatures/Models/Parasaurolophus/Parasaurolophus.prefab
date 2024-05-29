@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 11435004}
   - component: {fileID: 11486746}
   - component: {fileID: 4366877136904763648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Parasaurolophus
   m_TagString: Creature
   m_Icon: {fileID: 0}

@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 8270152}
   - component: {fileID: 11499034}
   - component: {fileID: -1897036915030605079}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Kentrosaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

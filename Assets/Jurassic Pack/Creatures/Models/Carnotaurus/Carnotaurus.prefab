@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 8299804}
   - component: {fileID: 11455794}
   - component: {fileID: 1838069931819793770}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Carnotaurus
   m_TagString: Creature
   m_Icon: {fileID: 0}

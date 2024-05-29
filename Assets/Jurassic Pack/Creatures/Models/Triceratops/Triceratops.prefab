@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 11485568}
   - component: {fileID: 11496276}
   - component: {fileID: -2395467665059037218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triceratops
   m_TagString: Creature
   m_Icon: {fileID: 0}

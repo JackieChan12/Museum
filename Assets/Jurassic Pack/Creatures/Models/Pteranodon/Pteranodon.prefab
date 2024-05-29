@@ -1373,7 +1373,7 @@ GameObject:
   - component: {fileID: 11427528}
   - component: {fileID: 11457652}
   - component: {fileID: 6370752902272568947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pteranodon
   m_TagString: Creature
   m_Icon: {fileID: 0}

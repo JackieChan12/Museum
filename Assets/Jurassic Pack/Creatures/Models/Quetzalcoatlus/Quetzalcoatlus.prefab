@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 82007834460852898}
   - component: {fileID: 11477586}
   - component: {fileID: 4360396878997367940}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Quetzalcoatlus
   m_TagString: Creature
   m_Icon: {fileID: 0}

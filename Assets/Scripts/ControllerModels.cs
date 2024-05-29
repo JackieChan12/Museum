@@ -96,7 +96,14 @@ public class ControllerModels : MonoBehaviour
             //    dinoModels[i].AddComponent<DinoModel>();
             //}
             dinoModelScript.dataModel.idModel = i;
-
+            dinoModels[i].layer = 8;
+            MeshCollider dinoMesh = dinoModels[i].GetComponent<MeshCollider>();
+            //if (dinoMesh == null)
+            //{
+            //    dinoMesh = dinoModels[i].AddComponent<MeshCollider>();
+            //}
+            SkinnedMeshRenderer skinMesh = dinoModels[i].GetComponentInChildren<SkinnedMeshRenderer>();
+            dinoMesh.sharedMesh = skinMesh.sharedMesh;
         }
     }
 

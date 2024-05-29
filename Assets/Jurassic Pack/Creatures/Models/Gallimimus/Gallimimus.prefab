@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 8219746}
   - component: {fileID: 11409110}
   - component: {fileID: 8970178105074080949}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Gallimimus
   m_TagString: Creature
   m_Icon: {fileID: 0}
